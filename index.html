@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="  crossorigin="anonymous">
+	</script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<title>Drag and drop stickers</title>
+</head>
+<body>
+	<style>
+		#content {
+			width:80%;
+			height:100vh;
+			overflow-x:hidden;
+			float:left;
+			background: url('images\\background.jpg') no-repeat;
+			background-size: cover;
+			margin: -10px -10px;
+		}
+		#sidebar {
+			width:20%;
+			float:right;
+			height:840px;
+			overflow-y:scroll;	
+		}
+
+		#sidebar div {
+			height:210px;
+			text-align: center;
+			vertical-align: middle;
+		}
+	</style>		
+
+	<div id="content">
+	</div>
+	<div id="sidebar">
+		<div><img src="images\dog.png"></div>	
+		<div><img src="images\cat.png"></div>
+		<div><img src="images\koala.png"></div>
+		<div><img src="images\kozel.png"></div>
+		<div><img src="images\bear.png"></div>
+		<div><img src="images\enot.png"></div>	
+		<div><img src="images\hamster.png"></div>
+		<div><img src="images\grumpycat.png"></div>
+		<div><img src="images\dog2.png"></div>
+	</div>
+	<script>
+		$(document).ready(() => {
+			$( "img" ).draggable({
+				helper: "clone",
+				containment: "window",
+				stop: function(event,ui) {
+					var newInstance = ui.helper["0"].cloneNode();	
+					document.getElementById("content").appendChild(newInstance);
+					$(newInstance).draggable({containment: "parent"});
+				}	
+			});
+		});
+	</script>
+</body>
+</html>
